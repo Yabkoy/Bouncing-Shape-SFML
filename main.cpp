@@ -5,6 +5,11 @@
 const int win_H = 600;
 const int win_W = 800;
 
+const float mainSpeed = 0.1;
+
+float movingX = mainSpeed;
+float movingY = mainSpeed;
+
 class windowFrame
 {
 private:
@@ -57,7 +62,7 @@ public:
 
 int main()
 {
-    sf::RenderWindow RW(sf::VideoMode(win_W, win_H), "Collision Detection");
+    sf::RenderWindow RW(sf::VideoMode(win_W, win_H), "Collision Detection", sf::Style::Default);
 
     windowFrame wF(win_W, win_H);
 
@@ -76,23 +81,6 @@ int main()
             {
                 RW.close();
             }
-
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-            {
-                RS.move(sf::Vector2f(0, -10));
-            }
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-            {
-                RS.move(sf::Vector2f(0, 10));
-            }
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-            {
-                RS.move(sf::Vector2f(-10, 0));
-            }
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-            {
-                RS.move(sf::Vector2f(10, 0));
-            }
         }
         RW.clear(sf::Color::Black);
 
@@ -100,9 +88,19 @@ int main()
         {
             RW.draw(wF.getFrameElement(i));
         }
-        RW.draw(RS);
 
-        wF.checkColisionDetection(RS);
+
+        if(RS.getGlobalBounds().intersects(wF.getFrameElement(1).getGlobalBounds()) || RS.getGlobalBounds().intersects(wF.getFrameElement(3).getGlobalBounds()))
+            movingY = -movingY;
+        if(RS.getGlobalBounds().intersects(wF.getFrameElement(0).getGlobalBounds()) || RS.getGlobalBounds().intersects(wF.getFrameElement(2).getGlobalBounds()))
+            movingX = -movingX;
+
+
+
+
+        RS.move(sf::Vector2f(movingX, movingY));
+
+        RW.draw(RS);
 
         RW.display();
     }
