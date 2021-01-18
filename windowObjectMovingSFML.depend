@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1611009601 source:c:\users\yabus\documents\cppsfml\windowobjectmovingsfml\main.cpp
+	"windowFrame.h"
+
+1611009425 source:c:\users\yabus\documents\cppsfml\windowobjectmovingsfml\src\windowframe.cpp
+	"windowFrame.h"
+
+1611009601 c:\users\yabus\documents\cppsfml\windowobjectmovingsfml\include\windowframe.h
+	<iostream>
+	<array>
+	<SFML/Graphics.hpp>
+
